@@ -29,6 +29,10 @@ void performance_test() {
     std::vector<size_t> prices, quantities;
     std::vector<bool> is_buys;
 
+    prices.reserve(NUM_ORDERS);
+    quantities.reserve(NUM_ORDERS);
+    is_buys.reserve(NUM_ORDERS);
+
     for (size_t i = 0; i < NUM_ORDERS; ++i) {
         prices.push_back(price_dist(rng));
         quantities.push_back(qty_dist(rng));
