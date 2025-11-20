@@ -1,0 +1,1 @@
+Elementary limit order book implementation, attempting to optimise performance in C++.
