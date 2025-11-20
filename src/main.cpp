@@ -13,7 +13,6 @@ void print_trades(std::vector<Trade>& trades) {
             "Quantity: " << trade.quantity << "\n" <<
             "===============" << "\n";
     }
-    std::cout << std::endl;
     
 }
 
@@ -23,8 +22,8 @@ void performance_test() {
     constexpr size_t NUM_ORDERS = 1'000'000;
     std::mt19937_64 rng(5);
 
-    std::uniform_int_distribution<int64_t> price_dist(PRICE_MIN, PRICE_MAX);
-    std::uniform_int_distribution<uint64_t> qty_dist(1, 10);
+    std::uniform_int_distribution<size_t> price_dist(PRICE_MIN, PRICE_MAX);
+    std::uniform_int_distribution<size_t> qty_dist(1, 10);
     std::bernoulli_distribution side_dist(0.5);
 
     std::vector<Trade> all_trades;
