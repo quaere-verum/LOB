@@ -26,6 +26,15 @@ void performance_test() {
     std::uniform_int_distribution<size_t> qty_dist(1, 10);
     std::bernoulli_distribution side_dist(0.5);
 
+    std::vector<size_t> prices, quantities;
+    std::vector<bool> is_buys;
+
+    for (size_t i = 0; i < NUM_ORDERS; ++i) {
+        prices.push_back(price_dist(rng));
+        quantities.push_back(qty_dist(rng));
+        is_buys.push_back(side_dist(rng));
+    }
+
     std::vector<Trade> all_trades;
     all_trades.reserve(NUM_ORDERS);
 
@@ -35,12 +44,8 @@ void performance_test() {
     auto start = std::chrono::high_resolution_clock::now();
 
     for (size_t i = 0; i < NUM_ORDERS; ++i) {
-        size_t price = price_dist(rng);
-        size_t quantity = qty_dist(rng);
-        bool is_buy = side_dist(rng);
-        size_t order_id = i + 1;
 
-        orderbook.submit_order(price, quantity, order_id, is_buy, trades);
+        orderbook.submit_order(prices[i], quantities[i], i, is_buys[i], trades);
         all_trades.insert(all_trades.end(), trades.begin(), trades.end());
     }
 
